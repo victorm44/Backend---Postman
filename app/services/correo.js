@@ -13,7 +13,7 @@ class enviar_correo {
 			secure: true,
 			auth: {
 				user: "victorm.restrepoj@gmail.com",
-				pass: "iskkrecuvkfllhnz"
+				pass: "zmvhsodiuvstgkwf"
 			},
             tls: {
                 rejectUnauthorized: false
@@ -21,7 +21,7 @@ class enviar_correo {
 		});
 	}
 	async enviarMensaje(destinatario, asunto, cuerpo) {
-        console.log("llega");
+        console.log("exito");
 		await this.transportador.sendMail({
 			from: this.correoRemitente,
 			to: destinatario,
@@ -31,4 +31,4 @@ class enviar_correo {
 	}
 }
 
-module.exports = servicioDeCorreo;
+module.exports = enviar_correo;
