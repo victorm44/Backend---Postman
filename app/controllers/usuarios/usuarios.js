@@ -1,6 +1,7 @@
 const PostgresService = require("../../services/postgres.service");
-const _pg = new PostgresService();
 const enviar_correo = require("../../services/correo");
+const _pg = new PostgresService();
+
 
 const getUsers = async (req, res) => {
     let sql = "select * from personas";
@@ -16,7 +17,7 @@ const getUsers = async (req, res) => {
 const createUsers = async (req, res) => {
     try {
         let user = req.body;
-        let sql = `INSERT INTO public.personas("name", email) VALUES('${user.name}','${user.email}');`;
+        let sql = `INSERT INTO public.personas("name", email) VALUES($1,$2);`;
         let datos = [user.name, user.email];
         let result = await _pg.executeSql2(sql, datos);
 
@@ -26,11 +27,9 @@ const createUsers = async (req, res) => {
             const _nodemailer = new enviar_correo();
             await _nodemailer.enviarMensaje(user.email, asunto, cuerpo);
         }
-        let result = await _pg.executeSql(sql);
-        console.log(result);
         return res.send({
             ok: result.rowCount == 1,
-            message: result.row == 1 ? "Usuario creado" : "EL usuario no fue creado",
+            message: result.rowCount == 1 ? "Usuario creado" : "El usuario no fue creado",
             content: user,
         });
     } catch (error) {

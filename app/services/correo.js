@@ -3,16 +3,16 @@ const correo = require("nodemailer");
 class enviar_correo {
 	constructor() {
         this.configuracion()
-		this.correoRemitente = '"Universidad" <victorm.restrepoj@gmail.com>';
+		this.correoRemitente = '"Universidad" <sebasbasebase@gmail.com>';
 	}
 
 	async configuracion() {
-		this.transportador = nodemailer.createTransport({
+		this.transportador = correo.createTransport({
 			host: "smtp.gmail.com",
 			port: 465,
 			secure: true,
 			auth: {
-				user: "victorm.restrepoj@gmail.com",
+				user: "sebasbasebase@gmail.com",
 				pass: "zmvhsodiuvstgkwf"
 			},
             tls: {
